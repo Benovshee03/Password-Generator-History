@@ -12,10 +12,9 @@ const lowerCheck = document.querySelector("#lower");
 const numberCheck = document.querySelector("#numbers");
 const symbolCheck = document.querySelector("#symbols");
 const generateButton = document.querySelector(".generate");
+const copyButton = document.querySelector(".take");
 const passwordInput = document.querySelector(".textInput");
-var randomPassword = "";
-var str = "QWERTYUIOPASDFGHJKLZXCVBNM";
-var newRan='';
+var newRan = "";
 range.value = 0;
 range.addEventListener("change", (e) => {
   size.innerHTML = e.target.value;
@@ -38,23 +37,28 @@ function getRandomPassword() {
   }
   if (!passwordAllCharacters) {
     alert("Please select at least one character type");
-    return; 
+    return;
   }
-  console.log(`${typeof passwordAllCharacters} `-`${passwordAllCharacters}`);
-  console.log(passwordAllCharacters);
-  console.log(typeof passwordAllCharacters);
-  newRan = ''
+  newRan = "";
   for (let i = 0; i < size.textContent; i++) {
     newRan += passwordAllCharacters.charAt(
       Math.floor(Math.random() * passwordAllCharacters.length)
     );
   }
-  passwordInput.value=newRan ;
-  console.log(newRan);
+  passwordInput.value = newRan;
 }
-
-
 generateButton.addEventListener("click", () => {
   getRandomPassword();
 });
-console.log(newRan);
+copyButton.addEventListener('click', () => {
+  if(newRan){
+    navigator.clipboard.writeText(newRan)
+    .then(() => {
+      alert("Password copied to clipboard: " + newRan);
+    })
+    .catch((error) => {
+      console.error( error);
+    });
+  }
+
+});
