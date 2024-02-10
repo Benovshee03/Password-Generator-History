@@ -63,7 +63,6 @@ copyButton.addEventListener("click", () => {
       });
   }
 });
-// document.addEventListener("DOMContentLoaded", function() {
 document.querySelector(".svg_gr").addEventListener("click", () => {
   if (newRan) {
     tbody.innerHTML += `
@@ -91,4 +90,3 @@ document.querySelector(".svg_gr").addEventListener("click", () => {
     }
   }
 });
-// });
