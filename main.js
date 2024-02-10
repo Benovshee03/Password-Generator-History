@@ -14,6 +14,7 @@ const symbolCheck = document.querySelector("#symbols");
 const generateButton = document.querySelector(".generate");
 const copyButton = document.querySelector(".take");
 const passwordInput = document.querySelector(".textInput");
+const tbody = document.querySelector(".tbody");
 var newRan = "";
 range.value = 0;
 range.addEventListener("change", (e) => {
@@ -50,15 +51,44 @@ function getRandomPassword() {
 generateButton.addEventListener("click", () => {
   getRandomPassword();
 });
-copyButton.addEventListener('click', () => {
-  if(newRan){
-    navigator.clipboard.writeText(newRan)
-    .then(() => {
-      alert("Password copied to clipboard: " + newRan);
-    })
-    .catch((error) => {
-      console.error( error);
-    });
+copyButton.addEventListener("click", () => {
+  if (newRan) {
+    navigator.clipboard
+      .writeText(newRan)
+      .then(() => {
+        alert("Password copied to clipboard: " + newRan);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
-
 });
+// document.addEventListener("DOMContentLoaded", function() {
+document.querySelector(".svg_gr").addEventListener("click", () => {
+  if (newRan) {
+    tbody.innerHTML += `
+      <div>
+          <tr class="copy1">
+              <td class="copy_pssw">${newRan}</td>
+              <td><img src="./Icon.svg" alt="CopyButton" class="copyFromList" /></td>
+          </tr>    
+      </div>`;
+    const copyLast = document.querySelector(".copyFromList");
+    console.log(copyLast);
+    if (copyLast) {
+      copyLast.addEventListener("click", () => {
+        if (newRan && tbody) {
+          navigator.clipboard
+            .writeText(newRan)
+            .then(() => {
+              alert("Password copied to clipboard: " + newRan);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+      });
+    }
+  }
+});
+// });
